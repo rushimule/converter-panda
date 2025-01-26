@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{tool_name}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    {% include 'nav.html' %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg p-4">
+                    <h1>Convert {{ tool_name.replace('-', ' ').title() }}</h1>
+                    <p class="text-center mb-4">Upload your file to get started. This tool will help you perform the
+                        selected operation on your document.</p>
+                         <form action="/tool/{{ tool_name }}" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                     <input type="file" class="form-control" name="file" required>
+                                </div>
+                                    {% if tool_name == 'sign-pdf' %}
+                                        <div class="form-group mt-3">
+                                            <label for="signature_text">Enter Signature Text</label>
+                                            <input type="text" class="form-control" name="signature_text" required placeholder="Enter your signature">
+                                        </div>
+                                    {% endif %}
+                                    {% if tool_name == 'watermark-pdf' %}
+                                    <!-- Watermark Type Selection -->
+                                    <div class="form-group mt-3">
+                                        <label for="watermark_type">Select Watermark Type:</label><br>
+                                        <input type="radio" id="text_watermark" name="watermark_type" value="text" checked>
+                                        <label for="text_watermark">Text Watermark</label><br>
+                                        <input type="radio" id="image_watermark" name="watermark_type" value="image">
+                                        <label for="image_watermark">Image Watermark</label>
+                                    </div>
+        
+                                    <!-- Text input for watermark text -->
+                                    <div class="form-group mt-3" id="text_watermark_input">
+                                        <label for="watermark_text">Watermark Text:</label>
+                                        <input type="text" class="form-control" name="watermark_text" placeholder="Enter watermark text" required>
+                                    </div>
+        
+                                    <!-- File input for watermark image -->
+                                    <div class="form-group mt-3" id="image_watermark_input" style="display: none;">
+                                        <label for="watermark_image">Upload Watermark Image:</label>
+                                        <input type="file" class="form-control" name="watermark_image" accept="image/*">
+                                    </div>
+                                {% endif %}
+                                    
+                                    <button type="submit" class="btn btn-primary mt-3">Convert</button>
+                        </form>
+                    
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Show or hide the watermark input fields based on selected watermark type
+        {% if tool_name == 'watermark-pdf' %}
+            document.querySelectorAll('input[name="watermark_type"]').forEach(function (radio) {
+                radio.addEventListener('change', function () {
+                    if (document.getElementById('text_watermark').checked) {
+                        document.getElementById('text_watermark_input').style.display = 'block';
+                        document.getElementById('image_watermark_input').style.display = 'none';
+                    } else if (document.getElementById('image_watermark').checked) {
+                        document.getElementById('text_watermark_input').style.display = 'none';
+                        document.getElementById('image_watermark_input').style.display = 'block';
+                    }
+                });
+            });
+        {% endif %}
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>CONVERT PANDA</title>
+    <!-- Include Bootstrap CSS  2dn one is icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"  rel="stylesheet" />
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+      .card {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        background-color:#f7f6e2;
+      }
+      
+
+      .card:hover {
+        transform: scale(0.9);
+      }
+      .card-bi img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+      /* Dropdown card styling */
+      .dropdown-card {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 250px;
+        z-index: 1000;
+        padding: 0;
+        margin-top: 0.5rem;
+        border: none;
+      }
+
+      /* Show dropdown on hover */
+      .nav-item:hover .dropdown-card {
+        display: block;
+      }
+
+      /* Card styling */
+      .dropdown-card .card {
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+        border: none;
+      }
+
+      /* Link styling */
+      .dropdown-item {
+        color: #333;
+        padding: 8px 12px;
+        transition: background-color 0.3s;
+      }
+
+      .dropdown-item:hover {
+        background-color: #7ec1dd; /* clour of feature1 2 3 dropdown*/
+        border-radius: 4px;
+      }
+
+      /* For smooth dropdown animation */
+      .dropdown-card {
+        transition: all 0.4s ease-in-out;
+      }
+      .navbar-toggler:focus {
+        box-shadow: none;
+      }
+      .nav-link {
+        font-weight: 500;
+        position: relative;
+        color: #fff !important;
+        text-transform: uppercase;
+        padding: 8px 12px;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: #7ec1dd;
+        transition: width 0.3s ease, left 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+        left: 0;
+      }
+
+      .navbar-brand a {
+        font-size: 1.5rem;
+        color: #fff;
+        font-weight: bold;
+      }
+      .square-icon {
+        display: inline-block;
+        color: #fff; 
+        width: 42px;
+        height: 42px;
+        background-color:#DC2941;
+        text-align: center;
+        line-height: 38px;
+        border: 3px solid #ce4f2f; /* Border with the same color as the icon */
+        border-radius: 10px; /* Optional: Rounded corners for the border */
+    }
+    
+  
+    </style>
+  </head>
+
+  <body style="background-image: url('https://images.unsplash.com/photo-1470790376778-a9fbc86d70e2?q=80&w=1904&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;background-position: center;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav" style="background-color: #73d555" >
+      <div class="container mx-4" style="color: #fff">
+        <h3 class="text-white d-flex align-items-center">
+          <!-- Logo -->
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Convert Panda Logo" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+          <!-- Title -->
+          <a href="/" class="text-decoration-none text-white">Convert Panda</a>
+        </h3>
+        <div class="collapse navbar-collapse mx-4" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+            <!-- HOME Dropdown Card -->
+            <li class="nav-item dropdown px-lg-4">
+              <a class="nav-link text-uppercase" id="homeDropdown" style=""> PDF-Tools </a>
+              <div class="dropdown-menu dropdown-card" aria-labelledby="homeDropdown">
+                <div class="card p-3">
+                  <a class="dropdown-item bi bi-gear-wide" href="/tool/pdf-to-word">Edit PDF</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="/tool/pdf-to-">Sign PDF</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Watermark PDF</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Rotate PDF</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Unlock PDF</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Protect PDF</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Compress PDF</a>
+                  
+                </div>
+              </div>
+            </li>
+            <!-- PRODUCTS Dropdown Card -->
+            <li class="nav-item dropdown px-lg-4">
+              <a class="nav-link text-uppercase" id="productDropdown"role="button">
+                PRODUCTS
+              </a>
+              <div class="dropdown-menu dropdown-card" aria-labelledby="productDropdown">
+                <div class="card p-3">
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Feature 1</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Feature 2</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Feature 3</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Feature 4</a>
+                </div>
+              </div>
+            </li>
+            <!-- About Dropdown Card -->
+            <li class="nav-item dropdown px-lg-4">
+              <a class="nav-link text-uppercase" id="aboutDropdown" role="button">
+                ABOUT
+              </a>
+              <div class="dropdown-menu dropdown-card" aria-labelledby="aboutDropdown">
+                <div class="card p-3">
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Our Story</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Team</a>
+                  <a class="dropdown-item bi bi-gear-wide" href="#">Careers</a>
+                </div>
+              </div>
+            </li>
+            <!-- store Dropdown Card -->
+            <li class="nav-item dropdown px-lg-4">
+              <a class="nav-link text-uppercase" id="storeDropdown"role="button">
+                STORE
+              </a>
+              <div class="dropdown-menu dropdown-card" aria-labelledby="storeDropdown" >
+                <div class="card p-3">
+                  <a class="dropdown-item" href="#">Our Story</a>
+                  <a class="dropdown-item" href="#">Team</a>
+                  <a class="dropdown-item" href="#">Careers</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <h1 class="text-center mb-8">All-in-One File Conversion Tools</h1>
+      <p class="text-center mb-5">
+        Simplify your work with our versatile tools. Convert, compress, merge,
+        and edit PDFs, images, text, CSVs, and more—all in one place. 100% FREE,
+        <br />
+        fast, and easy to use for everyone!"
+      </p>
+
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+        <!-- Card 19: merge pdf -->
+    <div class="col">
+        <div class="card shadow-sm h-100" data-url="/pdf_to_word">
+          <div class="card-body text-center"> 
+              <div class="d-flex justify-content-center align-items-center">
+                  <div class="d-flex flex-column align-items-center gap-0.5 me-0.5">
+                    <i class="bi bi-file-earmark-pdf" style="font-size: 22px; color: red;"></i>
+                    <i class="bi bi-file-earmark-pdf" style="font-size: 22px; color: red;"></i>
+                  </div>
+                  <i class="bi bi-arrow-bar-right"style="font-size: 30px; color: #4A7AAB;"></i>
+                  <i class="bi bi-file-earmark-pdf" style="font-size: 40px; color: green;"></i>
+                </div>
+            
+            <h5 class="card-title">Merge PDF</h5>
+            <p class="card-text">Sort and reorder the pages of your PDF.</p>
+          </div>
+        </div>
+      </div>
+
+        <!-- Card 1: PDF to word -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/pdf-to-word" style="background-color: #f7f6e2">
+            <div class="card-body text-center">
+              <i class="bi bi-file-pdf" style="font-size: 40px; color: red"></i>
+              <i class="bi bi-arrow-right" style="font-size: 24px; color: green"></i>
+              <i class="bi bi-file-word" style="font-size: 40px; color: #195cb8"></i>
+              <h5 class="card-title">pdf to word</h5>
+              <p class="card-text">
+                Combine multiple PDFs into a single document quickly and easily.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2:PDF to Powerpoint -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/pdf-to-powerpoint">
+            <div class="card-body text-center">
+              <i class="bi bi-file-pdf" style="font-size: 40px; color: red"></i>
+              <i class="bi bi-arrow-right"style="font-size: 24px; color: green"></i>
+              <i class="bi bi-file-ppt"style="font-size: 40px; color: #ce4f2f"></i>
+              <h5 class="card-title">powerpoint to pdf</h5>
+              <p class="card-text">
+                Separate a PDF into individual pages or sections.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Compress PDF -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/compress-pdf">
+            <div class="card-body text-center">
+              <i class="bi bi-arrows-angle-contract"style="font-size: 30px; color: red"></i>
+              <h5 class="card-title">Compress PDF</h5>
+              <p class="card-text">
+                Reduce the file size of your PDF without losing quality.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: PDF to Word -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/word-to-word">
+            <div class="card-body text-center">
+              <i class="bi bi-file-word"style="font-size: 40px; color: #195cb8"></i>
+              <i class="bi bi-arrow-right"style="font-size: 24px; color: green"></i>
+              <i class="bi bi-file-pdf" style="font-size: 40px; color: red"></i>
+              <h5 class="card-title">Word to PDF</h5>
+              <p class="card-text">
+                Convert your PDFs into editable Word documents.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5: CSV to EXCEL -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/csv-to-excel">
+            <div class="card-body text-center">
+              <i class="bi bi-filetype-csv" style="font-size: 40px; color: #43aa55" ></i>
+              <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+              <i class="bi bi-filetype-xls" style="font-size: 40px; color: #0f713c"></i>
+              <h5 class="card-title">CSV to Excel</h5>
+              <p class="card-text">
+                Convert your CSV into editable Excel File.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 6: CSV to Database -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/csv-to-database">
+            <div class="card-body text-center">
+              <i class="bi bi-filetype-csv" style="font-size: 40px; color: #43aa55" ></i>
+              <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+              <i class="bi bi-database" style="font-size: 40px; color: #0f713c" ></i>
+              <h5 class="card-title">CSV to Database</h5>
+              <p class="card-text">Convert your CSV into database file.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 7: csv clean -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/clean-csv">
+            <div class="card-body text-center">
+              <i class="bi bi-filetype-csv" style="font-size: 40px; color: #43aa55" ></i>
+              <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+              <i class="bi bi-file-text" style="font-size: 40px; color: #88888"></i>
+              <h5 class="card-title">CSV Cleaning</h5>
+              <p class="card-text">
+                Remove Duplicate Rows: Eliminate duplicate entries.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 8:  powerpoint to pdf -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/ppt-to-pdf">
+            <div class="card-body text-center">
+                <i class="bi bi-file-ppt" style="font-size: 40px; color: #ce4f2f" ></i>
+                <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+                <i class="bi bi-file-pdf" style="font-size: 40px; color:red"></i>
+              <h5 class="card-title">PPT to PDF</h5>
+              <p class="card-text">
+                Convert your Powerpoint into PDFs documents.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 9: Excel to pdf  -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="tool/excel-to-pdf">
+            <div class="card-body text-center">
+                <i class="bi bi-filetype-xls" style="font-size: 40px; color: #0f713c" ></i>
+                <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+                <i class="bi bi-file-pdf" style="font-size: 40px; color:red"></i>
+              <h5 class="card-title">Excel to PDF</h5>
+              <p class="card-text">Convert your Excel into PDFs documents.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 10: Edit pdf -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/pdf_to_word">
+            <div class="card-body text-center ">
+              <div class="position-relative d-inline-block" style="font-size: 40px;">
+                <i class="bi bi-square text-secondary" style="font-size: 40px;"></i>
+                <i class="bi bi-pen text-secondary position-absolute top-50 start-50 translate-middle" style="font-size: 26px;"></i>
+              </div>
+              <h5 class="card-title">Edit PDF</h5>
+              <p class="card-text">Edit your PDFs.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 11 : PDF to JPG -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/pdf-to-jpg">
+            <div class="card-body text-center">
+                <i class="bi bi-file-pdf" style="font-size: 40px; color: red" ></i>
+                <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+                <i class="bi bi-images" style="font-size: 40px; color:#FBEFA8"></i>
+              <h5 class="card-title">PDF to JPG</h5>
+              <p class="card-text">Convert your PDFs into JPG.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 12: JPG to pdf -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="tool/jpg-to-pdf">
+            <div class="card-body text-center">
+                <i class="bi bi-images" style="font-size: 40px; color:#FBEFA8"></i>
+                <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+                <i class="bi bi-file-pdf" style="font-size: 40px; color: red" ></i>              
+              <h5 class="card-title">JPG to Pdf</h5>
+              <p class="card-text">Convert your JPG into PDFs documents.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 13: sign pdf -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/tool/sign-pdf">
+            <div class="card-body text-center">
+                <i class="bi bi-vector-pen" style="font-size: 40px; color: #4A7AAB" ></i> 
+              <h5 class="card-title">Sign PDF</h5>
+              <p class="card-text">Sign and verify your PDFs.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 14: Watermark pdf -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="tool/watermark-pdf">
+            <div class="card-body text-center">
+                <i class="bi bi-postage" style="font-size: 40px; color: #AB6993" ></i> 
+              <h5 class="card-title">Watermark PDF</h5>
+              <p class="card-text">Add custom watermarks to your PDF files.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 15: Rotate PDF -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/pdf_to_word">
+            <div class="card-body text-center">
+                <i class="bi bi-arrow-clockwise square-icon" style="font-size: 35px; color:#fff  ;margin:8px" ></i> 
+              <h5 class="card-title">Rotate PDF</h5>
+              <p class="card-text">Rotate the pages of your PDF document.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 16: html to PDF -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/pdf_to_word">
+            <div class="card-body text-center">
+                <i class="bi bi-filetype-html" style="font-size: 40px; color:#FBEFA8"></i>
+                <i class="bi bi-arrow-right" style="font-size: 24px; color: green" ></i>
+                <i class="bi bi-file-pdf" style="font-size: 40px; color: red" ></i>
+              <h5 class="card-title">HTML to PDF</h5>
+              <p class="card-text">Convert webpages to PDF with a click..</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 17: Unlock PDF  -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/pdf_to_word">
+            <div class="card-body text-center">
+                <i class="bi bi-unlock"style="font-size: 40px; color: #4A7AAB" ></i> 
+              <h5 class="card-title">Unlock PDF</h5>
+              <p class="card-text">
+                Remove passwords and restrictions from PDFs.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 18: protect PDF -->
+        <div class="col">
+          <div class="card shadow-sm h-100" data-url="/pdf_to_word">
+            <div class="card-body text-center">
+                <i class="bi bi-file-earmark-lock"style="font-size: 40px; color: red"></i>
+              <h5 class="card-title">Protect PDF</h5>
+              <p class="card-text">Encrypt and password-protect your PDFs.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Add the rest of the cards similarly -->
+      </div>
+      <!-- End row -->
+    </div>
+    <!-- End container -->
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Add click events to all cards
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const url = this.getAttribute("data-url");
+          if (url) {
+            window.location.href = url;
+          }
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const dropdowns = document.querySelectorAll(".nav-item.dropdown");
+
+        dropdowns.forEach((dropdown) => {
+          let timeout;
+
+          dropdown.addEventListener("mouseenter", () => {
+            clearTimeout(timeout);
+            dropdown.querySelector(".dropdown-card").style.display = "block";
+          });
+
+          dropdown.addEventListener("mouseleave", () => {
+            timeout = setTimeout(() => {
+              dropdown.querySelector(".dropdown-card").style.display = "none";
+            }, 200); // 300ms delay before hiding
+          });
+        });
+      });
+    </script>
+     
+    <script>
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      document.addEventListener('keydown', event => {
+          if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'i')) {
+              event.preventDefault();
+          }
+      }); 
+  </script>
+  </body>
+</html>
